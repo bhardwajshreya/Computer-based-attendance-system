@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Users</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://cdn.pixabay.com/photo/2018/12/18/22/29/background-3883181_1280.jpg');
+            background-size: cover;
+            height: 100vh;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            color: white;
+        }
+
+        thead tr {
+            background-color: black;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: black;
+        }
+
+        form {
+            display: flex; /* Aligns the form buttons horizontally */
+            justify-content: center;
+        }
+
+        button[type="submit"] {
+            padding: 5px 10px;
+            background-color: #0b4c61;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0a3440;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>List of Registered Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in user_list %}
+            <tr>
+                <td>{{ user.split('_')[0] }}</td>
+                <td>{{ user.split('_')[1] }}</td>
+                <td>
+                    <form action="/delete_user" method="post">
+                        <input type="hidden" name="user_to_delete" value="{{ user}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+
+</html>
